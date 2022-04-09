@@ -159,12 +159,41 @@ export default {
         img.src = evt.target.result
       });
       FR.readAsDataURL(this.selectedImage)
+
+
+      fetch("/appMonitoring", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ action: "generate" }),
+        })
+          .then(function (response) {
+            console.log(response.json())
+          })
+          .catch(function (error) {
+            console.log(error)
+      })
     },
     downloadImage() {
       var link = document.createElement('a')
       link.download = 'demotywator.png'
       link.href = document.getElementById('result').toDataURL()
       link.click()
+
+      fetch("/appMonitoring", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ action: "download" }),
+        })
+          .then(function (response) {
+            console.log(response.json())
+          })
+          .catch(function (error) {
+            console.log(error)
+      })
     }
   }
 }

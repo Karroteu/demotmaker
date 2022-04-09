@@ -13,6 +13,21 @@ export default {
   name: 'Home',
   components: {
     Logo
+  },
+  mounted() {
+    fetch("/appMonitoring", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ action: "visit" }),
+    })
+    .then(function (response) {
+      console.log(response.json())
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
   }
 }
 </script>
